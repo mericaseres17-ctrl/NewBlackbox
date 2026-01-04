@@ -15,9 +15,14 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
-      - name: Accept Android SDK Licenses
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          # This automatically accepts all licenses for you
+          log-accepted-android-sdk-licenses: true
+
+      - name: Install NDK
         run: |
-          yes | sdkmanager --licenses
           sdkmanager "ndk;25.2.9519653" "cmake;3.22.1"
 
       - name: Grant Execute Permission for Gradlew
